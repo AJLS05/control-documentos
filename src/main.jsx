@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import './index.css'
 import AgregarPersona from './pages/AgregarPersona.jsx'
 import AgregarDocumento from './pages/AgregarDocumento.jsx'
 import Login from './pages/Login.jsx'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
+
 
 function ProtectedRoute({ children }) {
   const isAuth = localStorage.getItem('auth') === 'true'
@@ -14,7 +16,7 @@ function ProtectedRoute({ children }) {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   
-  <BrowserRouter>
+  <Router>
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route
@@ -42,5 +44,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         }
       />
     </Routes>
-  </BrowserRouter>
+  </Router>
 )
