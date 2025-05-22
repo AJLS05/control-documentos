@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from './supabaseClient'
+import { Link } from 'react-router-dom'
+
 
 function App() {
   const [registros, setRegistros] = useState([])
@@ -97,12 +99,12 @@ function App() {
     />
 
     <div className="flex justify-between mb-4">
-      <a href="/agregar-persona" className="bg-green-500 text-white px-4 py-2 rounded text-sm">
+      <link to="/agregar-persona" className="bg-green-500 text-white px-4 py-2 rounded text-sm">
         + Persona
-      </a>
-      <a href="/agregar-documento" className="bg-blue-500 text-white px-4 py-2 rounded text-sm">
+      </link>
+      <link to="/agregar-documento" className="bg-blue-500 text-white px-4 py-2 rounded text-sm">
         + Documento
-      </a>
+      </link>
     </div>
 
     <div className="overflow-x-auto">

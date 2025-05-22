@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { redirect, useNavigate } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
 
 function Login() {
@@ -12,7 +12,7 @@ function Login() {
     const { data, error } = await supabase
       .from('usuarios')
       .select('contraseña')
-      .eq('nombre', 'admin') // puedes cambiar esto si usas varios usuarios
+      .eq('nombre', 'admin')
       .single()
 
     if (error) {
@@ -23,7 +23,7 @@ function Login() {
 
     if (data.contraseña === password) {
       localStorage.setItem('auth', 'true')
-      navigate('/')
+      navigate('../App.jsx')
     } else {
       alert('Contraseña incorrecta')
     }
