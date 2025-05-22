@@ -82,7 +82,7 @@ function App() {
     <button
       onClick={() => {
         localStorage.removeItem('auth')
-        window.location.href = '/login'
+        window.location.href = './login'
       }}
       className="text-sm text-red-500 underline ml-auto"
     >
@@ -99,12 +99,12 @@ function App() {
     />
 
     <div className="flex justify-between mb-4">
-      <link to="/agregar-persona" className="bg-green-500 text-white px-4 py-2 rounded text-sm">
+      <Link to="/agregar-persona" className="bg-green-500 text-white px-4 py-2 rounded text-sm">
         + Persona
-      </link>
-      <link to="/agregar-documento" className="bg-blue-500 text-white px-4 py-2 rounded text-sm">
+      </Link>
+      <Link to="/agregar-documento" className="bg-blue-500 text-white px-4 py-2 rounded text-sm">
         + Documento
-      </link>
+      </Link>
     </div>
 
     <div className="overflow-x-auto">

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { redirect, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
 
 function Login() {
@@ -23,7 +23,7 @@ function Login() {
 
     if (data.contraseña === password) {
       localStorage.setItem('auth', 'true')
-      navigate('../App.jsx')
+      navigate('/')
     } else {
       alert('Contraseña incorrecta')
     }
