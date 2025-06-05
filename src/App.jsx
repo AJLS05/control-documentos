@@ -8,6 +8,8 @@ function App() {
   // Mover actualizarEstado fuera de useEffect para que esté disponible en el JSX
   const actualizarEstado = async (estadoId, campo, nuevoValor) => {
     // Actualizar el estado del documento en la base de datos
+    console.log(estadoId, campo, nuevoValor)
+    console.log()
     const { error } = await supabase
       .from('estados_documento')
       .update({ [campo]: nuevoValor })
@@ -136,13 +138,13 @@ function App() {
                 <td className="p-2 border">{persona.nombre}</td>
                 <td className="p-2 border">{persona.numero_identidad}</td>
                 <td className="p-2 border">{doc.nombre_documento}</td>
-                {["pendiente", "solicitado", "en_firma", "apostillando", "escaneado", "enviado"].map((estado) => (
+                {["pendiente", "solicitado", "en_firma", "apostillado", "escaneado", "enviado"].map((estado) => (
                   <td className="p-2 border text-center" key={estado}>
                     <input
                       type="checkbox"
                       checked={doc.estados_documento[0]?.[estado] || false}
                       onChange={() =>
-                        actualizarEstado(doc.estados_documento[0]?.id, estado, !doc.estados_documento[0]?.[estado])
+                        actualizarEstado(doc.id, estado, !doc.estados_documento[0]?.[estado])
                       }
                       className="w-4 h-4"
                     />
