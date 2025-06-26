@@ -15,39 +15,45 @@ function Login() {
       .eq('nombre', 'admin')
       .single()
 
-    if (error) {
-      alert('Error verificando credenciales')
-      console.error(error)
+    if (error || !data || data.contraseña !== password) {
+      alert('Contraseña incorrecta')
       return
     }
 
-    if (data.contraseña === password) {
-      localStorage.setItem('auth', 'true')
-      navigate('/')
-    } else {
-      alert('Contraseña incorrecta')
-    }
+    localStorage.setItem('auth', 'true')
+    navigate('/')
   }
 
   return (
-    <div className="p-4 max-w-screen-sm mx-auto">
-      <h1 className="text-2xl font-bold mb-6 text-center">Acceso a la app</h1>
-
-      <form onSubmit={handleLogin} className="space-y-4">
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="border p-2 w-full rounded"
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded w-full"
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="w-full max-w-md bg-white p-6 rounded shadow-md">
+        <div className="mt-6 text-center">
+        <a
+          href="#/estado-documento"
+          className="text-blue-600 underline text-sm"
         >
-          Ingresar
-        </button>
-      </form>
+          Consultar estado de mi documento
+        </a>
+      </div>
+        <h1 className="text-2xl font-bold mb-6 text-center">Acceso</h1>
+
+        <form onSubmit={handleLogin} className="space-y-4">
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="border p-2 w-full rounded"
+            required
+          />
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-4 py-2 rounded w-full"
+          >
+            Ingresar
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

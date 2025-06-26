@@ -1,57 +1,76 @@
-import { useState } from 'react'
-import { supabase } from '../supabaseClient.js'
-import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { supabase } from '../supabaseClient'
+import { Link, useNavigate } from 'react-router-dom'
 
 function AgregarPersona() {
-  const [nuevaPersona, setNuevaPersona] = useState({
-    nombre: '',
-    numero_identidad: ''
-  })
+  const { register, handleSubmit, setValue } = useForm()
+  const navigate = useNavigate()
 
-  const handleAgregarPersona = async (e) => {
-    e.preventDefault()
+  const formatearIdentidad = (valor) => {
+    const limpio = valor.replace(/\D/g, '')
+    const partes = []
+    if (limpio.length > 0) partes.push(limpio.slice(0, 4))
+    if (limpio.length > 4) partes.push(limpio.slice(4, 8))
+    if (limpio.length > 8) partes.push(limpio.slice(8, 13))
+    return partes.join('-')
+  }
+
+  const handleIdentidadChange = (e) => {
+    const formateado = formatearIdentidad(e.target.value)
+    setValue('numero_identidad', formateado)
+  }
+
+  const onSubmit = async (data) => {
+    const { nombre, numero_identidad } = data
+
     const { error } = await supabase
       .from('personas')
-      .insert([nuevaPersona])
+      .insert([{ nombre, numero_identidad }])
 
     if (error) {
-      alert("Error al agregar persona")
+      alert('Error al agregar persona')
       console.error(error)
     } else {
-      alert("Persona agregada correctamente")
-      setNuevaPersona({ nombre: '', numero_identidad: '' })
+      alert('Persona agregada correctamente')
+      navigate('/')
     }
   }
 
   return (
-    <div className="p-4 max-w-screen-sm mx-auto">
-      <h1 className="text-2xl font-bold mb-4 text-center">Agregar Persona</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="w-full max-w-md bg-white p-6 rounded shadow-md">
+        <h1 className="text-2xl font-bold mb-6 text-center">Agregar Persona</h1>
 
-      <form onSubmit={handleAgregarPersona} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Nombre"
-          value={nuevaPersona.nombre}
-          onChange={(e) => setNuevaPersona({ ...nuevaPersona, nombre: e.target.value })}
-          className="border p-2 w-full rounded"
-          required
-        />
-        <input
-          type="text"
-          placeholder="Número de identidad"
-          value={nuevaPersona.numero_identidad}
-          onChange={(e) => setNuevaPersona({ ...nuevaPersona, numero_identidad: e.target.value })}
-          className="border p-2 w-full rounded"
-          required
-        />
-        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded w-full">
-          Guardar Persona
-        </button>
-      </form>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <input
+            type="text"
+            placeholder="Nombre"
+            {...register('nombre', { required: true })}
+            className="border p-2 w-full rounded"
+          />
+          <input
+            type="text"
+            placeholder="Número de identidad"
+            {...register('numero_identidad', {
+              required: true,
+              pattern: /^\d{4}-\d{4}-\d{5}$/,
+            })}
+            onChange={handleIdentidadChange}
+            className="border p-2 w-full rounded"
+          />
 
-      <div className="flex justify-between mt-6">
-        <Link to="/" className="bg-gray-200 px-4 py-2 rounded">Inicio</Link>
-        <Link to="/agregar-documento" className="bg-blue-500 text-white px-4 py-2 rounded">+ Documento</Link>
+          <button
+            type="submit"
+            className="bg-green-600 text-white px-4 py-2 rounded w-full"
+          >
+            Guardar Persona
+          </button>
+        </form>
+
+        <div className="flex justify-between mt-6 text-sm">
+          <Link to="/" className="text-blue-600 underline">Inicio</Link>
+          <Link to="/agregar-documento" className="text-blue-600 underline">+ Documento</Link>
+        </div>
       </div>
     </div>
   )
