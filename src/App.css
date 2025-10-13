@@ -1,4 +1,15 @@
+@import "tailwindcss";
+
+a 
+{
+  font-weight: 500;
+  color: whitesmoke;
+  text-decoration: none; 
+}
+
 #root {
+  display: flex;
+  justify-content: center;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;

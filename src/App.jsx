@@ -80,7 +80,7 @@ function App() {
 
   return (
     
-  <div className="p-4 max-w-screen-sm mx-auto">
+  <div className="p-4 max-w-screen-sm mx-auto flex justify-between">
     <button
       onClick={() => {
         localStorage.removeItem('auth')
@@ -102,10 +102,10 @@ function App() {
 
     <div className="flex justify-between mb-4">
       <Link to="/agregar-persona" className="bg-green-500 text-white px-4 py-2 rounded text-sm">
-        + Persona
+        Agregar Persona
       </Link>
       <Link to="/agregar-documento" className="bg-blue-500 text-white px-4 py-2 rounded text-sm">
-        + Documento
+        Agregar Documento
       </Link>
     </div>
 

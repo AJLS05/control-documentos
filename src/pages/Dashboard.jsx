@@ -42,6 +42,25 @@ function Dashboard() {
     else console.error(error)
   }
 
+  // 🧩 NUEVA FUNCIÓN para eliminar documentos
+const eliminarDocumento = async (docId) => {
+  const confirmar = window.confirm("¿Seguro que deseas eliminar este documento?")
+  if (!confirmar) return
+
+  const { error } = await supabase
+    .from('documentos')
+    .delete()
+    .eq('id', docId)
+
+  if (error) {
+    console.error("Error al eliminar documento:", error)
+  } else {
+    alert("Documento eliminado correctamente.")
+    cargarDatos()
+  }
+}
+
+
   useEffect(() => {
     cargarDatos()
   }, [])
@@ -57,12 +76,12 @@ function Dashboard() {
   })
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <h1 className="text-2xl font-bold mb-4 text-center">Control de Trámites</h1>
+    <div className="min-h-screen bg-gray-950 p-4 grid flex flex-row justify-center">
+      <h1 className="text-2xl font-bold mb-4 text-center text-white">Control de Trámites</h1>
 
-      <div className="flex justify-between items-center mb-4">
-        <Link to="/agregar-persona" className="bg-green-600 text-white px-3 py-2 rounded text-sm">
-          + Persona
+      <div className="flex flex-row justify-between items-center mb-4 text-white">
+        <Link to="/agregar-persona" className="border rounded border-blue-500 text-white px-3 py-2 rounded text-sm no-underline text-decoration-none">
+          Agregar Persona
         </Link>
         <input
           type="text"
@@ -71,14 +90,14 @@ function Dashboard() {
           onChange={(e) => setBusqueda(e.target.value)}
           className="border rounded p-2 w-full mx-2"
         />
-        <Link to="/agregar-documento" className="bg-blue-600 text-white px-3 py-2 rounded text-sm">
-          + Documento
+        <Link to="/agregar-documento" className="border rounded border-blue-500 text-white px-3 py-2 rounded text-sm no-underline text-decoration-none">
+          Agregar Documento
         </Link>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full text-sm border border-gray-300 bg-white rounded">
-          <thead className="bg-gray-100">
+        <table className="w-full text-sm border border-gray-300 bg-gray-950 text-white rounded">
+          <thead className="bg-gray-800 text-white">
             <tr>
               <th className="p-2 border">Nombre</th>
               <th className="p-2 border">Identidad</th>
@@ -89,12 +108,13 @@ function Dashboard() {
               <th className="p-2 border">Apostillado</th>
               <th className="p-2 border">Escaneado</th>
               <th className="p-2 border">Enviado</th>
+              <th className="p-2 border">Acciones</th>
             </tr>
           </thead>
           <tbody>
             {filtrados.map((persona) =>
               persona.documentos.map((doc) => (
-                <tr key={doc.id} className="even:bg-gray-50">
+                <tr key={doc.id} className="even:bg-gray-950">
                   <td className="p-2 border">{persona.nombre}</td>
                   <td className="p-2 border">{persona.numero_identidad}</td>
                   <td className="p-2 border">{doc.nombre_documento}</td>
@@ -114,6 +134,14 @@ function Dashboard() {
                       />
                     </td>
                   ))}
+                  <td className="p-2 border text-center">
+                    <button
+                      onClick={() => eliminarDocumento(doc.id)}
+                      className="text-white bg-red-600 border border-red-500 px-2 py-1 rounded text-sm"
+                    >
+                      Eliminar 🗑️
+                    </button>
+                  </td>
                 </tr>
               ))
             )}
