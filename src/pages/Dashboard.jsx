@@ -104,8 +104,8 @@ const eliminarDocumento = async (docId) => {
               <th className="p-2 border">Documento</th>
               <th className="p-2 border">Pendiente</th>
               <th className="p-2 border">Solicitado</th>
-              <th className="p-2 border">En Firma</th>
-              <th className="p-2 border">Apostillado</th>
+              <th className="p-2 border">En Firma de la Corte</th>
+              <th className="p-2 border">En Apostilla de R.R.E.E.</th>
               <th className="p-2 border">Escaneado</th>
               <th className="p-2 border">Enviado</th>
               <th className="p-2 border">Acciones</th>

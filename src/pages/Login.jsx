@@ -25,17 +25,18 @@ function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md bg-white p-6 rounded shadow-md">
-        <div className="mt-6 text-center">
+    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4">
+      <div className="w-full max-w-md bg-gray-800 p-6 rounded shadow-md">
+        <div className="mt-6 text-center mb-6">
         <a
           href="#/estado-documento"
-          className="text-blue-600 underline text-sm"
+          className="text-blue-600 underline text-sm border rounded px-3 py-2 no-underline text-decoration-none"
         >
           Consultar estado de mi documento
         </a>
       </div>
-        <h1 className="text-2xl font-bold mb-6 text-center">Acceso</h1>
+
+        <h1 className="text-xl font-bold mb-6 text-center">Acceso</h1>
 
         <form onSubmit={handleLogin} className="space-y-4">
           <input

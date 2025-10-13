@@ -58,9 +58,9 @@ function ConsultaEstado() {
   const estados = ['pendiente', 'solicitado', 'en_firma', 'apostillado', 'escaneado', 'enviado']
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
-      <div className="w-full max-w-md bg-white p-6 rounded shadow-md">
-        <h1 className="text-2xl font-bold mb-4 text-center">Consulta de Documento</h1>
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gray-950">
+      <div className="w-full max-w-md bg-gray-800 p-6 rounded shadow-md">
+        <p className="text-2xl font-bold mb-4 text-center">Consulta de Documento</p>
 
         <form onSubmit={buscarDocumentos} className="space-y-4 mb-6">
           <input
@@ -83,7 +83,7 @@ function ConsultaEstado() {
 
         {!cargando && persona && (
           <div className="space-y-6">
-            <div className="bg-gray-100 p-4 rounded border text-sm">
+            <div className="bg-gray-800 p-4 rounded border text-sm">
               <p><strong>Nombre:</strong> {persona.nombre}</p>
               <p><strong>Identidad:</strong> {persona.numero_identidad}</p>
             </div>
@@ -91,12 +91,12 @@ function ConsultaEstado() {
             {persona.documentos.length > 0 ? (
               <div className="space-y-4">
                 {persona.documentos.map((doc) => (
-                  <div key={doc.id} className="border p-4 rounded bg-gray-100">
-                    <h2 className="font-semibold text-sm">{doc.nombre_documento}</h2>
+                  <div key={doc.id} className="border p-4 rounded bg-gray-800">
+                    <h2 className="font-semibold text-sm flex justify-center">{doc.nombre_documento}</h2>
                     <ul className="mt-2 space-y-1 text-sm">
                       {estados.map((estado) => (
                         <li key={estado}>
-                          {estado.charAt(0).toUpperCase() + estado.slice(1)}:{' '}
+                          {estado === 'en_firma' ? 'En Firma de la Corte' : estado === 'apostillado' ? 'En Apostilla de R.R.E.E.' : estado.charAt(0).toUpperCase() + estado.slice(1)}:{' '}
                           {doc.estados_documento[0]?.[estado] ? '✅' : '—'}
                         </li>
                       ))}
@@ -109,9 +109,8 @@ function ConsultaEstado() {
             )}
           </div>
         )}
-
         {!cargando && persona === null && identidad && (
-          <p className="text-center text-sm text-red-500 mt-4">No se encontraron documentos.</p>
+          <p className="text-center text-sm text-red-500 mt-4">No se encontraron documentos compruebe el número de identidad</p>
         )}
       </div>
     </div>
