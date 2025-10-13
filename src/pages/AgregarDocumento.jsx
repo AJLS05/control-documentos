@@ -46,9 +46,9 @@ function AgregarDocumento() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md bg-white p-6 rounded shadow-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">Agregar Documento</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4">
+      <div className="w-full max-w-md bg-gray-800 p-6 rounded shadow-md">
+        <h3 className="text-3xl font-bold mb-6 text-center">Agregar Documento</h3>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <select
@@ -56,7 +56,7 @@ function AgregarDocumento() {
             onChange={(e) =>
               setDocumento({ ...documento, persona_id: e.target.value })
             }
-            className="border p-2 w-full rounded"
+            className="border p-2 w-full rounded bg-gray-700"
             required
           >
             <option value="">Seleccionar persona</option>
@@ -80,7 +80,7 @@ function AgregarDocumento() {
 
           <button
             type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded w-full"
+            className="bg-green-600 text-white px-4 py-2 rounded w-full"
           >
             Guardar Documento
           </button>
@@ -88,7 +88,7 @@ function AgregarDocumento() {
 
         <div className="flex justify-between mt-6 text-sm">
           <Link to="/" className="text-blue-600 underline">Inicio</Link>
-          <Link to="/agregar-persona" className="text-green-600 underline">+ Persona</Link>
+          <Link to="/agregar-persona" className="text-green-600 underline">Agregar Persona</Link>
         </div>
       </div>
     </div>

@@ -37,10 +37,9 @@ function AgregarPersona() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md bg-white p-6 rounded shadow-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">Agregar Persona</h1>
-
+    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4">
+      <div className="w-full max-w-md bg-gray-800 p-6 rounded shadow-md">
+        <h2 className="text-3xl font-bold mb-6 text-center">Agregar Persona</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <input
             type="text"
@@ -69,7 +68,7 @@ function AgregarPersona() {
 
         <div className="flex justify-between mt-6 text-sm">
           <Link to="/" className="text-blue-600 underline">Inicio</Link>
-          <Link to="/agregar-documento" className="text-blue-600 underline">+ Documento</Link>
+          <Link to="/agregar-documento" className="text-blue-600 underline">Agregar Documento</Link>
         </div>
       </div>
     </div>
